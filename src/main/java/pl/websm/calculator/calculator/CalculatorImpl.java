@@ -4,6 +4,9 @@ import pl.websm.calculator.model.Country;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
+import java.util.Locale;
 
 
 public class CalculatorImpl implements Calculator {
@@ -28,6 +31,8 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public String convertMonetaryAmountToFormattedString(MonetaryAmount monetaryAmount, Country baseCountry) {
-        return null;
+        MonetaryAmountFormat baseCountryFormat = MonetaryFormats
+                .getAmountFormat(new Locale(baseCountry.getLanguageCode(), baseCountry.getCountryCode()));
+        return baseCountryFormat.format(monetaryAmount);
     }
 }
