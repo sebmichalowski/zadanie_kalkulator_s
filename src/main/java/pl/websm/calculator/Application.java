@@ -1,4 +1,4 @@
-package pl.websm.kalkulator;
+package pl.websm.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
