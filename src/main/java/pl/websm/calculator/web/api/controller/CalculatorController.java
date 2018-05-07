@@ -43,4 +43,17 @@ public class CalculatorController {
                 .calculateContractNetMonthlyIncome(grossValuePerDay, daysPerMonth, countryToConvertFrom, baseCountry);
         return new ResponseEntity<>(calculatedContractNetMonthlyIncome, HttpStatus.OK);
     }
+
+    @RequestMapping(
+            value = "{grossValuePerDay}/{countryCodeToConvertFrom}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCalculatedIncomeWithCountryCode(@PathVariable Double grossValuePerDay,
+                                                                        @PathVariable String countryCodeToConvertFrom){
+        Country baseCountry = countryService.findByCountryCode(baseCountryCode);
+        Country countryToConvertFrom = countryService.findByCountryCode(countryCodeToConvertFrom);
+        String calculatedContractNetMonthlyIncome = calculator
+                .calculateContractNetMonthlyIncome(grossValuePerDay, daysPerMonth, countryToConvertFrom, baseCountry);
+        return new ResponseEntity<>(calculatedContractNetMonthlyIncome, HttpStatus.OK);
+    }
 }
