@@ -1,4 +1,4 @@
-package pl.websm.kalkulator.service.ratesAPI;
+package pl.websm.calculator.service.ratesAPI;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
