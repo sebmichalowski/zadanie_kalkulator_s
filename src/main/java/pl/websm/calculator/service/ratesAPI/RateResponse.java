@@ -1,4 +1,4 @@
-package pl.websm.kalkulator.service.ratesAPI;
+package pl.websm.calculator.service.ratesAPI;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
