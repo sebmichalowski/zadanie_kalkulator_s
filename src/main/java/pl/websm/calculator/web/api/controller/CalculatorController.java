@@ -32,7 +32,7 @@ public class CalculatorController {
     }
 
     @RequestMapping(
-            value = "{grossValuePerDay}/{countryIdToConvertFrom}",
+            value = "a/{grossValuePerDay}/{countryIdToConvertFrom}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getCalculatedContractNetMonthlyIncome(@PathVariable Double grossValuePerDay,
@@ -45,13 +45,13 @@ public class CalculatorController {
     }
 
     @RequestMapping(
-            value = "{grossValuePerDay}/{countryCodeToConvertFrom}",
+            value = "b/{grossValuePerDay}/{countryCodeToConvertFrom}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getCalculatedIncomeWithCountryCode(@PathVariable Double grossValuePerDay,
                                                                         @PathVariable String countryCodeToConvertFrom){
         Country baseCountry = countryService.findByCountryCode(baseCountryCode);
-        Country countryToConvertFrom = countryService.findByCountryCode(countryCodeToConvertFrom);
+        Country countryToConvertFrom = countryService.findByCountryCode(countryCodeToConvertFrom.toUpperCase());
         String calculatedContractNetMonthlyIncome = calculator
                 .calculateContractNetMonthlyIncome(grossValuePerDay, daysPerMonth, countryToConvertFrom, baseCountry);
         return new ResponseEntity<>(calculatedContractNetMonthlyIncome, HttpStatus.OK);
