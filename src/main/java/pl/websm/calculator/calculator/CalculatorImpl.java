@@ -25,8 +25,11 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public String calculateContractNetMonthlyIncome(Double grossValuePerDay, Double daysPerMonth, Country countryToConvertFrom, Country baseCountry) {
-        return null;
+    public String calculateContractNetMonthlyIncome(Double grossValuePerDay,
+                                                    Double daysPerMonth,
+                                                    Country countryToConvertFrom,
+                                                    Country baseCountry) {
+      return null;
     }
 
     @Override
@@ -34,5 +37,10 @@ public class CalculatorImpl implements Calculator {
         MonetaryAmountFormat baseCountryFormat = MonetaryFormats
                 .getAmountFormat(new Locale(baseCountry.getLanguageCode(), baseCountry.getCountryCode()));
         return baseCountryFormat.format(monetaryAmount);
+    }
+
+    private MonetaryAmount multiplyDaysOfTheMonthWithGrossValuePerDay(Double daysPerMonth,
+                                                                      MonetaryAmount grossAmountPerDay) {
+        return grossAmountPerDay.multiply(daysPerMonth);
     }
 }
