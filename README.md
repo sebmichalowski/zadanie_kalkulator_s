@@ -13,7 +13,7 @@ mvn spring-boot:run
 
 ## Usage
 
-This is rest app so you have to communicate with your server with get methods
+This is rest app so you have to communicate with your server using get methods
 
 ### http://localhost:8080/{grossValuePerDay}/{countryCodeToConvertFrom}
 
