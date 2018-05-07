@@ -25,7 +25,7 @@ public class UpdateDatabaseScheduler implements ApplicationListener<ContextRefre
     private final CountryService countryService;
 
     @Value("${country.baseCountry}")
-    private String baseCountry;
+    private String baseCountryCode;
     private boolean justAfterRestart = true;
 
     public UpdateDatabaseScheduler(RateService rateService, CountryService countryService) {
@@ -40,7 +40,7 @@ public class UpdateDatabaseScheduler implements ApplicationListener<ContextRefre
         DayOfWeek dayOfTheWeek = LocalDate.now().getDayOfWeek();
         if (dayOfTheWeek.getValue() < 6 || justAfterRestart) {
             for (Country country : allCountries) {
-                if (country.getCountryCode().equals(baseCountry)) {
+                if (country.getCountryCode().equals(baseCountryCode)) {
                     continue;
                 }
 
@@ -59,6 +59,9 @@ public class UpdateDatabaseScheduler implements ApplicationListener<ContextRefre
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         updateDatabase();
+        Country baseCountry = countryService.findByCountryCode(baseCountryCode);
+        baseCountry.setMidExchangeRate(1.0);
+        countryService.update(baseCountry);
         justAfterRestart = false;
     }
 }
