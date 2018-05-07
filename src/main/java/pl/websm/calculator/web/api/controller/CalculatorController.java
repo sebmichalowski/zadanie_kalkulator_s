@@ -32,26 +32,16 @@ public class CalculatorController {
     }
 
     @RequestMapping(
-            value = "a/{grossValuePerDay}/{countryIdToConvertFrom}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getCalculatedContractNetMonthlyIncome(@PathVariable Double grossValuePerDay,
-                                                                        @PathVariable Long countryIdToConvertFrom){
-        Country baseCountry = countryService.findByCountryCode(baseCountryCode);
-        Country countryToConvertFrom = countryService.findById(countryIdToConvertFrom);
-        String calculatedContractNetMonthlyIncome = calculator
-                .calculateContractNetMonthlyIncome(grossValuePerDay, daysPerMonth, countryToConvertFrom, baseCountry);
-        return new ResponseEntity<>(calculatedContractNetMonthlyIncome, HttpStatus.OK);
-    }
-
-    @RequestMapping(
-            value = "b/{grossValuePerDay}/{countryCodeToConvertFrom}",
+            value = "{grossValuePerDay}/{countryCodeToConvertFrom}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getCalculatedIncomeWithCountryCode(@PathVariable Double grossValuePerDay,
                                                                      @PathVariable String countryCodeToConvertFrom){
         Country baseCountry = countryService.findByCountryCode(baseCountryCode);
         Country countryToConvertFrom = countryService.findByCountryCode(countryCodeToConvertFrom.toUpperCase());
+        if (baseCountry == null || countryToConvertFrom == null) {
+            return new ResponseEntity<>("No such country", HttpStatus.BAD_REQUEST);
+        }
         String calculatedContractNetMonthlyIncome = calculator
                 .calculateContractNetMonthlyIncome(grossValuePerDay, daysPerMonth, countryToConvertFrom, baseCountry);
         return new ResponseEntity<>(calculatedContractNetMonthlyIncome, HttpStatus.OK);
