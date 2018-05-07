@@ -1,4 +1,4 @@
-package pl.websm.kalkulator.web.api.controller;
+package pl.websm.calculator.web.api.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.websm.kalkulator.model.Country;
-import pl.websm.kalkulator.service.CountryService;
+import pl.websm.calculator.model.Country;
+import pl.websm.calculator.service.CountryService;
 
 import java.util.List;
 
