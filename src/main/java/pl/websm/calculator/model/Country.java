@@ -1,4 +1,4 @@
-package pl.websm.kalkulator.model;
+package pl.websm.calculator.model;
 
 import lombok.Data;
 
