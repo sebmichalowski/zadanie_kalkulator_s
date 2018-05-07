@@ -10,5 +10,6 @@ public interface CountryService {
     Country findById(Long id);
     Country findByCountryCode(String countryCode);
     void update(Country country, Rate rate);
+    void update(Country country);
 
 }
