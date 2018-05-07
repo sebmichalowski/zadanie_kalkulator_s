@@ -51,6 +51,12 @@ public class CountryServiceImpl implements CountryService {
             afterValidationUpdate(country,rate);
         }
     }
+
+    @Override
+    public void update(Country country) {
+        countryRepository.save(country);
+    }
+
     private void afterValidationUpdate(Country country, Rate rate){
         country.setMidExchangeRate(rate.getMid());
         country.setExchangeRateDateLastUpdate(rate.getEffectiveDate());
