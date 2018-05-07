@@ -49,7 +49,7 @@ public class CalculatorController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getCalculatedIncomeWithCountryCode(@PathVariable Double grossValuePerDay,
-                                                                        @PathVariable String countryCodeToConvertFrom){
+                                                                     @PathVariable String countryCodeToConvertFrom){
         Country baseCountry = countryService.findByCountryCode(baseCountryCode);
         Country countryToConvertFrom = countryService.findByCountryCode(countryCodeToConvertFrom.toUpperCase());
         String calculatedContractNetMonthlyIncome = calculator
