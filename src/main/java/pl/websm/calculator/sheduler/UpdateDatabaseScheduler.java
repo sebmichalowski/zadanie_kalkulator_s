@@ -1,4 +1,4 @@
-package pl.websm.kalkulator.sheduler;
+package pl.websm.calculator.sheduler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,11 +6,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import pl.websm.kalkulator.model.Country;
-import pl.websm.kalkulator.service.CountryService;
-import pl.websm.kalkulator.service.ratesAPI.Rate;
-import pl.websm.kalkulator.service.ratesAPI.RateResponse;
-import pl.websm.kalkulator.service.ratesAPI.RateService;
+import pl.websm.calculator.model.Country;
+import pl.websm.calculator.service.CountryService;
+import pl.websm.calculator.service.ratesAPI.Rate;
+import pl.websm.calculator.service.ratesAPI.RateResponse;
+import pl.websm.calculator.service.ratesAPI.RateService;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
