@@ -29,7 +29,21 @@ public class CalculatorImpl implements Calculator {
                                                     Double daysPerMonth,
                                                     Country countryToConvertFrom,
                                                     Country baseCountry) {
-        return null;
+        MonetaryAmount grossAmountPerDay = Monetary.getDefaultAmountFactory()
+                .setCurrency(Monetary.getCurrency(countryToConvertFrom.getCurrencyCode()))
+                .setNumber(grossValuePerDay)
+                .create();
+
+        MonetaryAmount grossAmountPerMonth = multiplyDaysOfTheMonthWithGrossValuePerDay(daysPerMonth, grossAmountPerDay);
+        MonetaryAmount taxAmountPerMonth = calculateTaxAmount(grossAmountPerMonth, countryToConvertFrom);
+        MonetaryAmount netAmountPerMonth = grossAmountPerMonth.subtract(taxAmountPerMonth);
+
+        MonetaryAmount netAmountInBaseCountryCurrency = convertMonetaryAmountToBaseCountryAmount(
+                countryToConvertFrom,
+                netAmountPerMonth,
+                baseCountry);
+
+        return convertMonetaryAmountToFormattedString(netAmountInBaseCountryCurrency, baseCountry);
     }
 
     @Override
