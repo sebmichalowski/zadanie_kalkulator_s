@@ -31,6 +31,9 @@ public class CalculatorImplTest {
         baseCountry.setCountryCode("PL");
         baseCountry.setLanguageCode("pl");
         baseCountry.setCurrencyCode("PLN");
+        baseCountry.setMidExchangeRate(1.0);
+        baseCountry.setFixedCosts(1200.00);
+        baseCountry.setTaxValue(0.19);
     }
 
     @Test
@@ -65,6 +68,12 @@ public class CalculatorImplTest {
         uk.setFixedCosts(600.0);
         uk.setTaxValue(0.25);
 
+        assertEquals("106,55 PLN",
+                calculator.calculateContractNetMonthlyIncome(1.00,
+                        daysPerMonth,
+                        uk,
+                        baseCountry));
+
         assertEquals("8 717,4 PLN",
                     calculator.calculateContractNetMonthlyIncome(100.00,
                         daysPerMonth,
@@ -81,6 +90,34 @@ public class CalculatorImplTest {
                 calculator.calculateContractNetMonthlyIncome(777.33,
                         daysPerMonth,
                         uk,
+                        baseCountry));
+    }
+
+    @Test
+    public void calculateContractNetMonthlyIncomeFromBaseCountryToBaseCountry() {
+
+        assertEquals("44 PLN",
+                calculator.calculateContractNetMonthlyIncome(2.00,
+                        daysPerMonth,
+                        baseCountry,
+                        baseCountry));
+
+        assertEquals("2 010 PLN",
+                calculator.calculateContractNetMonthlyIncome(100.00,
+                        daysPerMonth,
+                        baseCountry,
+                        baseCountry));
+
+        assertEquals("14 074,14 PLN",
+                calculator.calculateContractNetMonthlyIncome(777.00,
+                        daysPerMonth,
+                        baseCountry,
+                        baseCountry));
+
+        assertEquals("14 080,02 PLN",
+                calculator.calculateContractNetMonthlyIncome(777.33,
+                        daysPerMonth,
+                        baseCountry,
                         baseCountry));
     }
 }
