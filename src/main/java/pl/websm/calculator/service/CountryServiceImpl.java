@@ -1,9 +1,9 @@
-package pl.websm.kalkulator.service;
+package pl.websm.calculator.service;
 
 import org.springframework.stereotype.Service;
-import pl.websm.kalkulator.model.Country;
-import pl.websm.kalkulator.repository.CountryRepository;
-import pl.websm.kalkulator.service.ratesAPI.Rate;
+import pl.websm.calculator.model.Country;
+import pl.websm.calculator.repository.CountryRepository;
+import pl.websm.calculator.service.ratesAPI.Rate;
 
 import java.util.*;
 
@@ -26,6 +26,15 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country findById(Long id) {
         Optional<Country> optionalCountry = countryRepository.findById(id);
+        if (optionalCountry.isPresent()){
+            return optionalCountry.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Country findByCountryCode(String countryCode) {
+        Optional<Country> optionalCountry = countryRepository.findByCountryCode(countryCode);
         if (optionalCountry.isPresent()){
             return optionalCountry.get();
         }
